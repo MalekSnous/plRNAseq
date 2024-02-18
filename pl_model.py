@@ -652,14 +652,14 @@ class plSVM():
         return (vec_C_error.sum()/torch.count_nonzero(vec_C_error)).detach().tolist()
 
     def param_grid(self):
-        param_grid = {"lambdaa": [1.e-4, 1.e-3, 1.e-2],  # 3
-                 "gamma": [1],  # 20
+        param_grid = {"lambdaa": np.logspace(-4,1,5).tolist(), #[1.e-4, 1.e-3, 1.e-2],  # 3
+                          "gamma": [1],  # 20
                           "p": [1] # 3
                    
                       }
         if self.kernel :
-           param_grid = {"lambdaa": [1.e-4, 1.e-3],  # 2
-                      "gamma": np.logspace(-4,1,20).tolist(),  # 20
+           param_grid = {"lambdaa": np.logspace(-4,1,5).tolist(),  # 2
+                      "gamma": np.logspace(-4,1,10).tolist(),  # 20
                           "p": [500, 1000],}
         return param_grid
 
